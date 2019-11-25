@@ -1,0 +1,43 @@
+%Orbita planetaria usando Runge Kutta de segunda ordem
+
+npoints=1000;
+dt = 0.001; % intervalo de tempo em anos
+t=0;
+x=1; % Inicializa a posição em AU
+y=0;
+v_x=0; % iinicializa a velocidade do planeta em AU/yr 
+% v_y=2*pi; % Inicializa a veocidade y AU/yr
+v_y=5; % Inicializa a veocidade y AU/yr
+% Plot Sol
+plot(0,0,'oy','MarkerSize',30, 'MarkerFaceColor','yellow');
+title('Beta = 2')
+axis([-1 1 -1 1]);
+xlabel('x(AU)');
+ylabel('y(AU)');
+
+hold on;
+for step = 1:npoints-1;
+% loop
+radius=sqrt(x^2+y^2);
+% Calcula valores de Runge Kutta para y
+y_dash=y+0.5*v_y*dt;
+v_y_dash=v_y - 0.5*(4*pi^2*y*dt)/(radius^3);
+% Atualiza a posição e velocidade y
+y_new=y+v_y_dash*dt;
+v_y_new=v_y-(4*pi^2*y_dash*dt)/(radius^3);
+% Calcula valores de Runge Kutta para x
+x_dash=x+0.5*v_x*dt;
+v_x_dash=v_x - 0.5*(4*pi^2*x*dt)/(radius^3);
+% Atualiza posições usando a velocidade calculada
+x_new=x+v_x_dash*dt;
+v_x_new=v_x-(4*pi^2*x_dash*dt)/(radius^3);
+% Plot planeta
+plot(x_new,y_new);
+drawnow;
+% Atualiza as velocidades
+v_x=v_x_new;
+v_y=v_y_new;
+% Atualiza X e Y
+x=x_new;
+y=y_new;
+end;

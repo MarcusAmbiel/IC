@@ -1,0 +1,21 @@
+% The von Neumann equation for time evolution
+% Metodo de Euler
+
+clear;
+
+p0 = [0.5 0.5; 0.5 0.5];
+H = [1 0; 0 -1];
+dti = 0.01;
+
+M = [H*p0 - p0*H];
+  Pdt{1} = dti * (-1i*M) + p0;
+    
+for k=1:1000
+  M = H*Pdt{k} - Pdt{k}*H;
+  Pdt{k+1} = dti * (-1i*M) + Pdt{k}; 
+endfor
+
+for k=1:size(Pdt,2)
+  v(k)=real(Pdt{k}(1,2));
+endfor
+plot(v)

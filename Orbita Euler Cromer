@@ -1,0 +1,38 @@
+% Órbita planetária usando métodos de Euler Cromer.
+
+npoints=500;
+dt = 0.002; % Intervalo de tempo em anos
+x=1; % Inicializa a posição 
+y=0;
+v_x=0; % Inicializa a velocidade do planeta em AU/yr
+v_y=2*pi;
+% Plot  traçado do sol
+plot(0,0,'oy','MarkerSize',30, 'MarkerFaceColor','yellow');
+axis([-1 1 -1 1]);
+xlabel('x(AU)');
+ylabel('y(AU)');
+hold on;
+for step = 1:npoints-1;
+  %k=k+1;
+% loop
+radius=sqrt(x^2+y^2);
+% Calcula novas velocidades nas direçoes x e y
+v_x_new=v_x - (4*pi^2*x*dt)/(radius^3);
+v_y_new=v_y - (4*pi^2*y*dt)/(radius^3);
+% Euler Cromer, atualiza as posições usando as velocidades calculadas
+x_new=x+v_x_new*dt;
+y_new=y+v_y_new*dt;
+% Plot a posição do planeta
+plot(x_new,y_new);
+%drawnow;
+% Atualiza as velocidades de x e y
+v_x=v_x_new;
+v_y=v_y_new;
+% Atualiza a posição
+x=x_new;
+y=y_new;
+vetx(step) = x;
+vety(step) = y;
+end;
+%plot(vetx,vety,'-k');
+%drawnow;

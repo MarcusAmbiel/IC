@@ -1,2 +1,2 @@
-# Inicia-oCient-fica
+# Iniciação Científica
 Algoritmos desenvolvidos durante Iniciação Científica

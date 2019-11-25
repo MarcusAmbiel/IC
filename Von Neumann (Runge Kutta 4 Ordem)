@@ -1,0 +1,26 @@
+clear;
+
+p0 = [0.5 0.5; 0.5 0.5];
+H = [1 0; 0 -1];
+dt = 0.01;
+
+rho{1}=p0;
+M = [H*p0 - p0*H];
+  Pdt{1} = (-1i*M);
+
+             
+for k=1:10000
+  
+ f1=-1i*(H*rho{k} - rho{k}*H)*dt;
+ f2=-1i*(H*(rho{k}+f1/2) - (rho{k}+f1/2)*H)*dt; 
+ f3=-1i*(H*(rho{k}+f2/2) - (rho{k}+f2/2)*H)*dt; 
+ f4=-1i*(H*(rho{k}+f3) - (rho{k}+f3)*H)*dt;
+ 
+  rho{k+1} = rho{k} + ((f1+(2*f2)+(2*f3)+f4)/6);
+ 
+endfor
+
+for k=1:size(rho,2)
+  v(k)=real(rho{k}(1,2));
+endfor
+plot(v)

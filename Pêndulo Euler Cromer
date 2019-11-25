@@ -1,0 +1,20 @@
+%Equação de movimento simples utilizando do método de Euler, onde as oscilaçoes crescem com o tempo
+%
+clear;
+comp= 1; %Comprimento do pendulo em metros
+g=9.8 % Aceleração da gravidade
+npoints = 250; %Tempo em 250 intervalos
+dt = 0.04; % Intervalo de tempo em segundos
+omega = zeros(npoints,1); % Inicializa um vetor Omega de dimensão x1 para todos os zeros
+theta = zeros(npoints,1); % Inicializa um vetor Theta de dimensão x1 para todos os zeros
+time = zeros(npoints,1); % Inicializa o vetor tempo para todos os zeros
+theta(1)=0.2; % Deslocamento inicial do pendulo
+
+for step = 1:npoints-1 % loop
+omega(step+1) = omega(step) - (g/comp)*theta(step)*dt;
+theta(step+1) = theta(step)+omega(step)*dt
+time(step+1) = time(step) + dt;
+end
+plot(time,theta,'r' ); %plot da solução
+xlabel('time (seconds) ');
+ylabel('theta (radians)');

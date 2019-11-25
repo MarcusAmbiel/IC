@@ -1,0 +1,22 @@
+N_uranium_initial = 10000; %Numero inicial de átomos de uranio
+npoints = 1000; %Dividir em 100 intervalor
+dt = 1e7; % Intervalo de tempo em anos
+tau=4.4e9; % VIda media do 238 U
+N_uranium = zeros(npoints,1); % Inicia um vetor de dimensão N para todos os zeros
+all zeros
+time = zeros(npoints,1); % Inicializa o tempo do vetor para todos os zeros
+N_uranium(1) = N_uranium_initial; % Condição Inicial
+N_uranium_initial
+time(1) = 0; %Tempo Inicial
+for step=1:npoints-1 % Loop e cálculo numérico
+N_uranium(step+1) = N_uranium(step) - (N_uranium(step)/tau)*dt;
+time(step+1) = time(step) + dt;
+end
+%Para o loop e calcula a soluçao analitica
+t=0:1e8:10e9;
+N_analytical=N_uranium_initial*exp(-t/tau);
+% Traça a solução numérica e analitica
+plot(time,N_uranium,'r',t,N_analytical,'b'); %Plota no gráfico a solução numérica e analitica
+solution in blue
+xlabel('Time in years')
+ylabel('Number of atoms')

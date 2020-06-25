@@ -1,0 +1,25 @@
+%André, Marcus
+%Matlab
+clear;
+clc;
+clear all;
+
+vetM{2}= [1 0 ; 0 -1];
+vetM{1}= [0 1 ; 1 0];
+
+n=5;
+for k=1:n
+v{k}= ones(1,n);
+end
+
+
+for k=1: n-1
+
+        v{k}(1,k)=2;
+	v{k}(1,k+1)=2; 
+end
+
+for k=1:n       
+      M{k}=kron(vetM{v{k}(1,n)},vetM{v{k}(1,n)});
+      M{k}=kron(M{k},vetM{v{k}(1,k)});
+end
